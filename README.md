@@ -25,7 +25,7 @@ The setup includes:
 * **Load Testing:** Includes a k6 script (`stress_test.js`) to generate load against the FastAPI application.
 
 ## Directory Structure
-
+```bash
 .
 ├── docker-compose.yaml         # Main Docker Compose file
 ├── Dockerfile                  # Defines the FastAPI application image (implied)
@@ -47,7 +47,7 @@ The setup includes:
 │   └── prometheus.yml          # Prometheus configuration file
 └── promtail/
 └── config.yml              # Promtail configuration file
-
+```
 ## Prerequisites
 
 * Docker ([Install Docker](https://docs.docker.com/engine/install/))

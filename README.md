@@ -5,18 +5,18 @@ This project demonstrates a FastAPI application integrated with a comprehensive 
 ## Overview
 
 The setup includes:
-* A simple **FastAPI** application (`the-app`) with several example endpoints and built-in metrics exposure (`/metrics`)[cite: 1].
-* **Prometheus** (`prometheus-observer`) for scraping and storing metrics from the FastAPI application[cite: 1].
-* **Grafana** (`grafana-observer`) for visualizing metrics from Prometheus and logs from Loki. It includes a provisioned dashboard specifically for the FastAPI application[cite: 1].
-* **Loki** (`loki-observer`) for log aggregation[cite: 1].
-* **Promtail** (`promtail-observer`) for collecting logs from Docker containers (specifically `the-app`) and sending them to Loki[cite: 1].
+* A simple **FastAPI** application (`the-app`) with several example endpoints and built-in metrics exposure (`/metrics`).
+* **Prometheus** (`prometheus-observer`) for scraping and storing metrics from the FastAPI application.
+* **Grafana** (`grafana-observer`) for visualizing metrics from Prometheus and logs from Loki. It includes a provisioned dashboard specifically for the FastAPI application.
+* **Loki** (`loki-observer`) for log aggregation.
+* **Promtail** (`promtail-observer`) for collecting logs from Docker containers (specifically `the-app`) and sending them to Loki.
 
 ## Features
 
 * **Metrics Collection:** FastAPI app exposes Prometheus metrics via `/metrics` using `prometheus-fastapi-instrumentator`. Prometheus scrapes this endpoint.
 * **Log Aggregation:** Promtail tails Docker container logs and pushes them to Loki.
 * **Visualization:** Grafana provides dashboards to view metrics (Prometheus datasource) and logs (Loki datasource).
-* **Containerized:** All services run in Docker containers orchestrated by Docker Compose[cite: 1].
+* **Containerized:** All services run in Docker containers orchestrated by Docker Compose.
 * **Load Testing:** Includes a k6 script (`stress_test.js`) to generate load against the FastAPI application.
 
 ## Directory Structure
@@ -30,18 +30,18 @@ This project demonstrates a FastAPI application integrated with a comprehensive 
 ## Overview
 
 The setup includes:
-* A simple **FastAPI** application (`the-app`) with several example endpoints and built-in metrics exposure (`/metrics`)[cite: 1].
-* **Prometheus** (`prometheus-observer`) for scraping and storing metrics from the FastAPI application[cite: 1].
-* **Grafana** (`grafana-observer`) for visualizing metrics from Prometheus and logs from Loki. It includes a provisioned dashboard specifically for the FastAPI application[cite: 1].
-* **Loki** (`loki-observer`) for log aggregation[cite: 1].
-* **Promtail** (`promtail-observer`) for collecting logs from Docker containers (specifically `the-app`) and sending them to Loki[cite: 1].
+* A simple **FastAPI** application (`the-app`) with several example endpoints and built-in metrics exposure (`/metrics`).
+* **Prometheus** (`prometheus-observer`) for scraping and storing metrics from the FastAPI application.
+* **Grafana** (`grafana-observer`) for visualizing metrics from Prometheus and logs from Loki. It includes a provisioned dashboard specifically for the FastAPI application.
+* **Loki** (`loki-observer`) for log aggregation.
+* **Promtail** (`promtail-observer`) for collecting logs from Docker containers (specifically `the-app`) and sending them to Loki.
 
 ## Features
 
 * **Metrics Collection:** FastAPI app exposes Prometheus metrics via `/metrics` using `prometheus-fastapi-instrumentator`. Prometheus scrapes this endpoint.
 * **Log Aggregation:** Promtail tails Docker container logs and pushes them to Loki.
 * **Visualization:** Grafana provides dashboards to view metrics (Prometheus datasource) and logs (Loki datasource).
-* **Containerized:** All services run in Docker containers orchestrated by Docker Compose[cite: 1].
+* **Containerized:** All services run in Docker containers orchestrated by Docker Compose.
 * **Load Testing:** Includes a k6 script (`stress_test.js`) to generate load against the FastAPI application.
 
 ## Directory Structure
@@ -99,12 +99,12 @@ The setup includes:
 
 Once the containers are running, you can access the services via your browser:
 
-* **FastAPI Application:** [http://localhost:5060](http://localhost:5060) [cite: 1]
+* **FastAPI Application:** [http://localhost:5060](http://localhost:5060) 
 * **FastAPI Metrics:** [http://localhost:5060/metrics](http://localhost:5060/metrics)
-* **Grafana:** [http://localhost:3000](http://localhost:3000) (Login: admin/admin) [cite: 1]
-* **Prometheus:** [http://localhost:9090](http://localhost:9090) [cite: 1]
-* **Loki:** (Usually accessed via Grafana, but API is at port 3100) [cite: 1]
-* **Promtail:** (Runs as an agent, typically no UI access needed) [cite: 1]
+* **Grafana:** [http://localhost:3000](http://localhost:3000) (Login: admin/admin) 
+* **Prometheus:** [http://localhost:9090](http://localhost:9090) 
+* **Loki:** (Usually accessed via Grafana, but API is at port 3100) 
+* **Promtail:** (Runs as an agent, typically no UI access needed) 
 
 ## Load Testing
 
@@ -119,7 +119,7 @@ A k6 script (`stress_test.js`) is included to simulate traffic against the FastA
 
 ## Configuration
 
-* **FastAPI:** Configuration is within `main.py` and dependencies in `requirements.txt`. The application runs on port 5060 internally[cite: 1].
+* **FastAPI:** Configuration is within `main.py` and dependencies in `requirements.txt`. The application runs on port 5060 internally.
 * **Prometheus:** Configured in `prometheus/prometheus.yml` to scrape itself and the `the-app:5060` target.
 * **Loki:** Configured in `loki/config.yml`.
 * **Promtail:** Configured in `promtail/config.yml` to read Docker socket logs and send to `loki-app:3100`.

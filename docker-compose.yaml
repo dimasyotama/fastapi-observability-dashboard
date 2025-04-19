@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+  prometheus-app:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    container_name: prometheus-observer
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana-observer
+    restart: unless-stopped
+    depends_on:
+      - prometheus-app
+      - loki-app
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - monitoring
+
+  loki-app:
+    image: grafana/loki:latest
+    container_name: loki-observer
+    restart: unless-stopped
+    ports:
+      - 3100:3100
+    volumes:
+      - ./loki/config.yml:/etc/loki/config.yaml
+    networks:
+      - monitoring
+
+  promtail-app:
+    image: grafana/promtail:latest
+    container_name: promtail-observer
+    restart: unless-stopped
+    volumes:
+      - ./promtail/config.yml:/etc/promtail/config.yaml  # Mount the Promtail config file
+      - /var/run/docker.sock:/var/run/docker.sock # Mount the Docker socket
+      # - ./logs:/app/logs # Only needed for file log scraping
+    command: ["-config.file=/etc/promtail/config.yaml"]
+    depends_on: # Ensure loki is available before promtail starts
+      - loki-app
+    networks:
+      - monitoring
+
+  # --- NEW SERVICE FOR YOUR FASTAPI APP ---
+  the-app:
+    build: . # Instructs Docker Compose to build the image using the Dockerfile in the current directory
+    container_name: the-app
+    restart: unless-stopped
+    ports:
+      - "5060:5060" # Map host port 5060 to container port 5060 (where uvicorn runs)
+    networks:
+      - monitoring # Add the app to the monitoring network
+    # Optional: Add volume for development live-reloading
+    # This mounts your local main.py into the container.
+    # Changes in local main.py will be reflected if you run uvicorn with --reload.
+    # Comment out or remove for production builds where code is baked into the image.
+    # volumes:
+    #   - ./main.py:/app/main.py
+
+networks:
+  monitoring:
+    external: true # Use the external network created earlier

@@ -25,31 +25,6 @@ The setup includes:
 * **Load Testing:** Includes a k6 script (`stress_test.js`) to generate load against the FastAPI application.
 
 ## Directory Structure
-Okay, here is a README.md file generated based on the structure and content of your fastapi-observability-dashboard project.
-Markdown
-
-# FastAPI Observability Dashboard
-
-This project demonstrates a FastAPI application integrated with a comprehensive observability stack using Prometheus, Grafana, and Loki, all managed via Docker Compose.
-
-## Overview
-
-The setup includes:
-* A simple **FastAPI** application (`the-app`) with several example endpoints and built-in metrics exposure (`/metrics`).
-* **Prometheus** (`prometheus-observer`) for scraping and storing metrics from the FastAPI application.
-* **Grafana** (`grafana-observer`) for visualizing metrics from Prometheus and logs from Loki. It includes a provisioned dashboard specifically for the FastAPI application.
-* **Loki** (`loki-observer`) for log aggregation.
-* **Promtail** (`promtail-observer`) for collecting logs from Docker containers (specifically `the-app`) and sending them to Loki.
-
-## Features
-
-* **Metrics Collection:** FastAPI app exposes Prometheus metrics via `/metrics` using `prometheus-fastapi-instrumentator`. Prometheus scrapes this endpoint.
-* **Log Aggregation:** Promtail tails Docker container logs and pushes them to Loki.
-* **Visualization:** Grafana provides dashboards to view metrics (Prometheus datasource) and logs (Loki datasource).
-* **Containerized:** All services run in Docker containers orchestrated by Docker Compose.
-* **Load Testing:** Includes a k6 script (`stress_test.js`) to generate load against the FastAPI application.
-
-## Directory Structure
 
 .
 ├── docker-compose.yaml         # Main Docker Compose file

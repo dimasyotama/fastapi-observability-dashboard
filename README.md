@@ -1,8 +1,8 @@
 # FastAPI Observability Dashboard
 
 This project demonstrates a FastAPI application integrated with a comprehensive observability stack using Prometheus, Grafana, and Loki, all managed via Docker Compose.
-![Alt text](Screenshot 2025-04-19 at 14.53.18.png)
-![Alt text](Screenshot 2025-04-19 at 14.53.25.png)
+![Alt text][(Screenshot 2025-04-19 at 14.53.18.png)](https://github.com/dimasyotama/fastapi-observability-dashboard/blob/master/Screenshot%202025-04-19%20at%2014.53.18.png)
+![Alt text][(Screenshot 2025-04-19 at 14.53.25.png)](https://github.com/dimasyotama/fastapi-observability-dashboard/blob/master/Screenshot%202025-04-19%20at%2014.53.25.png)
 ## Overview
 
 The setup includes:

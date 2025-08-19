@@ -69,6 +69,35 @@ services:
     # Comment out or remove for production builds where code is baked into the image.
     # volumes:
     #   - ./main.py:/app/main.py
+  
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: otel-collector
+    restart: unless-stopped
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collection-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4317:4317"  # OTLP gRPC receiver
+      - "4318:4318"  # OTLP HTTP receiver
+    networks:
+      - monitoring
+    depends_on:
+      - tempo # Export to Tempo
+
+  tempo:
+    image: grafana/tempo:latest
+    container_name: tempo
+    restart: unless-stopped
+    command: ["-config.file=/etc/tempo.yaml"]
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
+      # - ./tempo-data:/tmp/tempo # Optional: Persist data
+    ports:
+      - "3200:3200"   # Tempo UI
+      - "4317"        # OTLP gRPC. Port is mapped by otel-collector
+    networks:
+      - monitoring
 
 networks:
   monitoring:
